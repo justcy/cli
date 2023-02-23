@@ -1,4 +1,4 @@
-module github.com/justcy/cli
+module github.com/go-micro/cli
 
 go 1.18
 
