@@ -11,9 +11,9 @@ import (
 	"github.com/pkg/errors"
 	"github.com/urfave/cli/v2"
 
-	mcli "github.com/go-micro/cli/cmd"
-	"github.com/go-micro/cli/generator"
-	tmpl "github.com/go-micro/cli/generator/template"
+	mcli "github.com/justcy/cli/cmd"
+	"github.com/justcy/cli/generator"
+	tmpl "github.com/justcy/cli/generator/template"
 )
 
 var flags []cli.Flag = []cli.Flag{
