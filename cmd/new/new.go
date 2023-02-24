@@ -38,6 +38,10 @@ var flags []cli.Flag = []cli.Flag{
 		Usage: "Generate gRPC Health service used for Kubernetes liveliness and readiness probes",
 	},
 	&cli.BoolFlag{
+		Name:  "redis",
+		Usage: "Generate redis resources",
+	},
+	&cli.BoolFlag{
 		Name:  "kustomize",
 		Usage: "Generate kubernetes resouce files in a kustomize structure",
 	},
@@ -166,6 +170,7 @@ func createProject(ctx *cli.Context, pt string) error {
 		generator.PrivateRepo(ctx.Bool("privaterepo")),
 		generator.Namespace(ctx.String("namespace")),
 		generator.PostgresAddress(ctx.String("postgresaddress")),
+		generator.Redis(ctx.Bool("redis")),
 	)
 
 	files := []generator.File{
@@ -206,7 +211,11 @@ func createProject(ctx *cli.Context, pt string) error {
 			{Path: "postgres/migrations/", Template: ""},
 		}...)
 	}
-
+	if opts.Redis {
+		files = append(files, []generator.File{
+			{Path: "models/redis.go", Template: tmpl.Redis},
+		}...)
+	}
 	if opts.Tern {
 		files = append(files, []generator.File{
 			{Path: "postgres/migrations/001_create_schema.sql", Template: tmpl.TernSql},

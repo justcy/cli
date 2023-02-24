@@ -38,6 +38,7 @@ type Options struct {
 	Namespace string
 	// PostgresAddress sets the default postgres address
 	PostgresAddress string
+	Redis           bool
 }
 
 // Option manipulates the Options passed.
@@ -159,5 +160,12 @@ func Namespace(s string) Option {
 func PostgresAddress(s string) Option {
 	return func(o *Options) {
 		o.PostgresAddress = s
+	}
+}
+
+// Redis
+func Redis(s bool) Option {
+	return func(o *Options) {
+		o.Redis = s
 	}
 }
